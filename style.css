@@ -1,0 +1,313 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&family=Roboto:wght@100;300;400;500;700;900&display=swap");
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-text-color: #183b56;
+    --secondary-text-color: #577592;
+    --accent-color: #2294ed;
+    --accent-color-dark: #1d69a3;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    color: var(--primary-text-color);
+    background-color:#8acbd8
+}
+
+p {
+    font-family: "Roboto", sans-serif;
+    color: var(--secondary-text-color);
+    line-height: 1.4rem;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+}
+
+.container {
+    max-width: 1180px;
+    margin-inline: auto;
+    overflow: hidden;
+}
+
+nav {
+    background-color: #f3faff;
+    box-shadow: 0 0 4px #bbd0e2;
+    position: fixed;
+    top: 0;
+    z-index: 99;
+    left: 0;
+    right: 0;
+}
+
+.main-nav {
+    justify-content: space-between;
+    padding-block: 8px;
+}
+
+.company-logo img {
+    width: 75px;
+}
+
+.nav-links ul {
+    gap: 100px;
+}
+
+.hover-link {
+    list-style: none;
+    cursor: pointer;
+}
+
+.hover-link:hover {
+    color: var(--secondary-text-color);
+}
+
+.hover-link:active {
+    color: red;
+}
+
+.nav-item.active {
+    color: var(--secondary-text-color);
+}
+
+.search-bar {
+    height: 32px;
+    gap: 8px;
+}
+
+.news-input {
+    width: 200px;
+    height: 100%;
+    padding-inline: 12px;
+    border-radius: 4px;
+    border: 2px solid #bbd0e2;
+    font-family: "Roboto", sans-serif;
+}
+
+.search-button {
+    background-color: var(--accent-color);
+    color: white;
+    padding: 8px 24px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: "Roboto", sans-serif;
+}
+
+.search-button:hover {
+    background-color: var(--accent-color-dark);
+}
+
+main {
+    padding-block: 20px;
+    margin-top: 80px;
+}
+
+.cards-container {
+    justify-content: space-between;
+    flex-wrap: wrap;
+    row-gap: 20px;
+    align-items: start;
+    margin-top: 20px;
+}
+
+.card {
+    width: 360px;
+    min-height: 400px;
+    box-shadow: 0 0 4px #d4ecff;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #fff;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 1px 1px 8px #d4ecff;
+    background-color: #f9fdff;
+    transform: translateY(-2px);
+}
+
+.card-header img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.card-content {
+    position: relative;
+    padding: 12px;
+}
+
+.news-source {
+    margin-block: 12px;
+}
+
+#goToTopBtn {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#goToTopBtn:hover {
+    background-color: #0056b3;
+}
+
+/* Show the button when the user scrolls down */
+#goToTopBtn.show {
+    display: block;
+}
+/* ... Other styles ... */
+
+/* Dropdown menu styles */
+.dropdown-menu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #f3faff;
+    border: 1px solid #bbd0e2;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: none;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+.dropdown-menu li {
+    margin-bottom: 6px; /* Add a gap between each list item */
+    padding: 4px 16px
+}
+.subscribe-button {
+    background-color: var(--accent-color);
+    color: white;
+    padding: 8px 24px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: "Roboto", sans-serif;
+    margin-left: 10px; /* Add some spacing between the Translate button and the Subscribe button */
+}
+
+.subscribe-button:hover {
+    background-color: var(--accent-color-dark);
+}
+.floating-subscribe-button {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    z-index: 999; /* Ensure the button stays above other elements */
+}
+.go-to-top-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 999;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.go-to-top-button:hover {
+    background-color: #0056b3;
+}
+.share-button {
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    color: #183b56;
+}
+
+.share-options {
+    display: none;
+    position: absolute;
+    top: 40px;
+    right: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 2;
+    padding: 10px;
+    border-radius: 4px;
+}
+.share-options {
+    /* Other styles for the share options... */
+     /* Green background color */
+    color: #fff; /* Text color for the share options (white in this case) */
+    /* Other styles for the share options... */
+}
+
+.share-options a {
+    /* Other styles for the share option links... */
+    color: #fff; /* Text color for the share option links (white in this case) */
+    /* Other styles for the share option links... */
+}
+
+.share-options a[href^="whatsapp"] {
+     /* Text color for WhatsApp share option (white in this case) */
+    color: #54bc0a; /* Green background color for WhatsApp share option */
+}
+
+.share-options a[href^="https://t.me/"], 
+.share-options a[href^="https://www.facebook.com/"] {
+    /* Text color for Telegram and Facebook share options (white in this case) */
+    color: #1e90ff; /* Skyblue background color for Telegram and Facebook share options */
+}
+
+.share-options a[href^="https://www.linkedin.com/"] {
+     /* Text color for LinkedIn share option (white in this case) */
+    color: #000080; /* Navy blue background color for LinkedIn share option */
+}
+
+.share-options a[href^="https://twitter.com/"] {
+     /* Text color for Twitter share option (white in this case) */
+    color: #1e90ff; /* Thick skyblue background color for Twitter share option */
+}
+
+.share-options a {
+    display: block;
+    margin-bottom: 5px;
+}
+#navItem4 {
+    position: absolute;
+    right: 1.5cm;
+} 
+
+/* Dark Mode Styles
+.dark-mode {
+    background-color: #222;
+    color: #fff;
+}
+
+.dark-mode .text-black {
+    color: #000;
+} */

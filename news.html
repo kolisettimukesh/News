@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News APP</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="shortcut icon" href="download.png" type="image/png">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <nav>
+        <div class="main-nav container flex">
+            <a href="#" onclick="reload()" class="company-logo">
+                <img src="download.png" alt="company-logo">
+            </a>
+            <div class="nav-links">
+                <ul class="flex">
+                    <li class="hover-link nav-item" id="sports" onclick="onNavItemClick('sports')">Sports</li>
+                    <li class="hover-link nav-item" id="finance" onclick="onNavItemClick('finance')">Finance</li>
+                    <li class="hover-link nav-item" id="politics" onclick="onNavItemClick('politics')">Politics</li>
+
+                </ul>
+                <div class="dropdown-menu" id="dropdown-menu">
+                    <ul>
+                        <li class="hover-link" onclick="onNavItemClick('entertainment')">Entertainment</li>
+                        <li class="hover-link" onclick="onNavItemClick('jobs')">Jobs</li>
+                        <li class="hover-link" onclick="onNavItemClick('business')">Business</li>
+                        <li class="hover-link" onclick="onNavItemClick('science')">Science</li>
+                        <li class="hover-link" onclick="onNavItemClick('technology')">Technology</li>
+                        <li class="hover-link" onclick="onNavItemClick('arts')">Arts</li>
+                        <li class="hover-link" onclick="onNavItemClick('culture')">Culture</li>
+                        <li class="hover-link" onclick="onNavItemClick('entrepreneurship')">Entrepreneurship</li>
+                        <button style="background-color: red;margin-left: 30px; width: 80px;height: 30px;color: white;"
+                            class="hover-link" onclick="onNavItemClick('trending')">Trending</button>
+                    </ul>
+                </div>
+            </div>
+            <div class="search-bar flex">
+                <input id="search-text" type="text" class="news-input" placeholder="e.g. Politics">
+                <button id="search-button" class="search-button" onclick="searchNews()">Search</button>
+            </div>
+            <li class="hover-link nav-item" id="nav-dropdown" onclick="toggleDropdown()">☰</li>
+            <div id="google_translate_element" class="translate-button"></div>
+            <script type="text/javascript">
+                function googleTranslateElementInit() {
+                    new google.translate.TranslateElement({ pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE }, 'google_translate_element');
+                }
+            </script>
+            <script type="text/javascript"
+                src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+            <a class="nav-links" href="reg.html" id="navItem4">Sign up</a>
+
+        </div>
+
+
+    </nav>
+
+
+    <main>
+        <div class="cards-container container flex" id="cards-container">
+
+        </div>
+        <!-- <button id="toggle-mode-button" onclick="toggleDarkMode()">Dark Mode</button> -->
+    </main>
+
+    <template id="template-news-card">
+        <div class="card">
+            <div class="card-header">
+                <img src="https://via.placeholder.com/400x200" alt="news-image" id="news-img">
+            </div>
+            <div class="card-content">
+                <h3 id="news-title">This is the title</h3>
+                <h6 class="news-source" id="news-source">End Gadget 26/08/2023</h6>
+                <p class="news-desc" id="news-desc">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quasi
+                    soluta tenetur, veritatis ipsa enim vero nam aspernatur sapiente architecto hic beatae!
+                    Maiores unde incidunt quasi libero labore doloribus ratione ut.</p>
+                <div class="share-button">
+                    <i class="fas fa-share-alt" onclick="showShareOptions(event)"></i>
+                </div>
+                <div class="share-options">
+                    <!-- WhatsApp share option -->
+                    <a href="whatsapp://send?text=Check%20out%20this%20news:%20${encodeURIComponent(article.url)}"
+                        target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+
+                    <!-- Telegram share option -->
+                    <a href="https://t.me/share/url?url=${encodeURIComponent(article.url)}" target="_blank"
+                        rel="noopener noreferrer" onclick="event.stopPropagation();">
+                        <i class="fab fa-telegram"></i>
+                    </a>
+
+                    <!-- Facebook share option -->
+                    <a href="https://www.facebook.com/sharer.php?u=${encodeURIComponent(article.url)}" target="_blank"
+                        rel="noopener noreferrer" onclick="event.stopPropagation();">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <!-- Twitter share option -->
+                    <a href="https://twitter.com/intent/tweet?url=${encodeURIComponent(article.url)}" target="_blank"
+                        rel="noopener noreferrer" onclick="event.stopPropagation();">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+
+                    <!-- LinkedIn share option -->
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(article.url)}"
+                        target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+
+
+                </div>
+            </div>
+        </div>
+    </template>
+    <div class="floating-subscribe-button">
+        <button class="subscribe-button" onclick="openSubscribePage()">Subscribe</button>
+    </div>
+    <button onclick="goToTop()" id="goToTopBtn" class="go-to-top-button"><i class="fas fa-arrow-up"></i></button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+    <script>
+
+        // Function to toggle the dropdown menu
+        function toggleDropdown() {
+            const dropdownMenu = document.getElementById('dropdown-menu');
+            const navToggle = document.getElementById('nav-dropdown');
+            dropdownOpen = !dropdownOpen;
+            if (dropdownOpen) {
+                dropdownMenu.style.display = 'block';
+                dropdownMenu.style.top = `${navToggle.getBoundingClientRect().bottom}px`;
+                dropdownMenu.style.left = `${navToggle.getBoundingClientRect().left}px`;
+                // Add an event listener to the document to close the dropdown menu when clicking anywhere on the page
+                document.addEventListener('click', hideDropdown);
+            } else {
+                dropdownMenu.style.display = 'none';
+                // Remove the event listener when the dropdown menu is hidden
+                document.removeEventListener('click', hideDropdown);
+            }
+        }
+
+        // Function to close the dropdown menu
+        function hideDropdown() {
+            const dropdownMenu = document.getElementById('dropdown-menu');
+            dropdownMenu.style.display = 'none';
+            dropdownOpen = false;
+            // Remove the event listener after closing the dropdown menu
+            document.removeEventListener('click', hideDropdown);
+        }
+
+        // Function to hide the share options for each card
+        function hideShareOptions(event) {
+            const shareOptions = document.querySelectorAll(".share-options");
+            shareOptions.forEach(shareOption => {
+                // Check if the clicked element is not inside the share options container for each card
+                if (!shareOption.contains(event.target)) {
+                    shareOption.style.display = "none";
+                }
+            });
+        }
+
+        function showShareOptions(event) {
+            event.stopPropagation();
+            event.preventDefault();
+
+            const cardContent = event.target.closest(".card-content");
+            const shareOptions = cardContent.querySelector(".share-options");
+
+            // Toggle the display of share options
+            shareOptions.style.display = shareOptions.style.display === "block" ? "none" : "block";
+
+            // Add an event listener to the document to close the share options when clicking anywhere on the page
+            document.addEventListener('click', hideShareOptions);
+        }
+
+
+
+    </script>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
